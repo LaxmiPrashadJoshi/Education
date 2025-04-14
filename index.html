@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="नेपाली भाषामा ब्लग, जानकारी र नोटहरू">
+  <meta name="keywords" content="नेपाली ब्लग, नेपाली नोट, शिक्षा, नेपाल">
+  <meta name="author" content="लक्ष्मीप्रसाद जोशी">
+  <meta property="og:title" content="मेरो नेपाली ब्लग">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://example.com">
+  <meta property="og:image" content="https://example.com/logo.jpg">
+  <title>मेरो ब्लग</title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    /* तेर्सो मेनु स्टाइल */
+    .top-header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .main-menu {
+      background-color: #1abc9c;
+      padding: 0.5rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .main-menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.5rem 1.2rem;
+      margin: 0 0.1rem;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .main-menu a:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+    
+    .main-menu a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: white;
+      transition: width 0.3s;
+    }
+    
+    .main-menu a:hover::after {
+      width: 70%;
+    }
+    
+    .main-menu a[aria-current="page"] {
+      background-color: rgba(0,0,0,0.2);
+    }
+
+    main {
+      max-width: 1024px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 2rem;
+    }
+
+    .blog-posts {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .blog-post {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .blog-post:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .blog-post h2 {
+      margin-bottom: 0.5rem;
+      color: #34495e;
+    }
+
+    aside {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 100px;
+      align-self: start;
+    }
+
+    aside h3 {
+      margin-bottom: 1rem;
+      color: #2c3e50;
+      border-bottom: 2px solid #1abc9c;
+      padding-bottom: 0.5rem;
+    }
+
+    .download-section {
+      background: #fff6e5;
+      border: 1px dashed #f39c12;
+      padding: 1.5rem;
+      margin: 2rem auto;
+      max-width: 1024px;
+      text-align: center;
+      border-radius: 8px;
+    }
+
+    .download-section h3 {
+      color: #e67e22;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .download-section p {
+      margin-bottom: 1.5rem;
+    }
+
+    .download-section button {
+      padding: 0.7rem 1.5rem;
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .download-section button:hover {
+      background-color: #1e8449;
+    }
+
+    .calendar-section {
+      background: #e8f8f5;
+      border: 1px solid #1abc9c;
+      padding: 1.5rem;
+      margin: 2rem auto;
+      max-width: 1024px;
+      text-align: center;
+      border-radius: 8px;
+    }
+
+    .calendar-section h3 {
+      color: #16a085;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .calendar-section iframe {
+      border: none;
+      width: 100%;
+      height: 450px;
+      border-radius: 6px;
+    }
+
+    .footer-gadget {
+      background: #ecf0f1;
+      color: #2c3e50;
+      padding: 2rem 0;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .footer-gadget h4 {
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    .footer-links {
+      background: #dfe6e9;
+      text-align: center;
+      padding: 1.2rem 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      margin: 0 1.2rem;
+      text-decoration: none;
+      color: #2c3e50;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: #1abc9c;
+      text-decoration: underline;
+    }
+
+    footer {
+      background: #34495e;
+      color: white;
+      text-align: center;
+      padding: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .book-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .book-item {
+      margin-bottom: 0;
+      padding: 1.2rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .book-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .book-item img {
+      width: 120px;
+      height: 180px;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border-radius: 4px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+
+    .book-item p {
+      margin-bottom: 1rem;
+      font-weight: bold;
+      color: #2c3e50;
+      text-align: center;
+    }
+
+    .payment-methods {
+      display: none;
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .payment-methods button {
+      margin: 0.7rem;
+      padding: 0.7rem 1.5rem;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 1rem;
+    }
+
+    .payment-methods button:hover {
+      background-color: #2980b9;
+    }
+
+    #selected-book {
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      color: #e67e22;
+      font-size: 1.1rem;
+    }
+
+    /* डार्क मोड स्टाइल */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #121212;
+        color: #e0e0e0;
+      }
+      
+      .blog-post, aside, .download-section, .calendar-section, .book-item {
+        background-color: #1e1e1e;
+        color: #ffffff;
+        box-shadow: 0 0 5px rgba(255,255,255,0.1);
+      }
+      
+      .blog-post h2, aside h3 {
+        color: #bb86fc;
+      }
+      
+      .download-section {
+        background: #2d2d2d;
+        border-color: #f39c12;
+      }
+      
+      .calendar-section {
+        background: #1a2e2b;
+        border-color: #1abc9c;
+      }
+      
+      .footer-gadget {
+        background: #1a1a1a;
+        color: #e0e0e0;
+      }
+      
+      .footer-links {
+        background: #2d2d2d;
+      }
+      
+      .footer-links a {
+        color: #e0e0e0;
+      }
+      
+      .book-item p {
+        color: #e0e0e0;
+      }
+    }
+
+    /* मोबाइल रेस्पोन्सिभनेस */
+    @media (max-width: 768px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+      
+      .main-menu {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+      }
+      
+      .main-menu a {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        padding: 0.8rem;
+        border-radius: 0;
+      }
+      
+      .main-menu a::after {
+        display: none;
+      }
+      
+      aside {
+        position: static;
+        margin-top: 2rem;
+      }
+      
+      .book-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <!-- Google AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</head>
+<body>
+  <div class="top-header">
+    <h1>मेरो ब्लग</h1>
+    <p>ज्ञान, विचार र अनुभवहरूको साझेदारी</p>
+  </div>
+  <nav class="main-menu" aria-label="मुख्य मेनु">
+    <a href="#" aria-current="page"><i class="fas fa-home"></i> गृहपृष्ठ</a>
+    <a href="#"><i class="fas fa-blog"></i> ब्लगहरू</a>
+    <a href="#"><i class="fas fa-book"></i> नोटहरू</a>
+    <a href="#"><i class="fas fa-info-circle"></i> हाम्रोबारे</a>
+    <a href="#"><i class="fas fa-envelope"></i> सम्पर्क</a>
+    <a href="#"><i class="fas fa-download"></i> डाउनलोड</a>
+  </nav>
+
+  <main>
+    <section class="blog-posts" id="posts">
+      <!-- ब्लग पोष्टहरू यहाँ लोड हुनेछ -->
+    </section>
+    <aside>
+      <h3><i class="fa fa-wrench"></i> ग्याजेटहरू</h3>
+      <p>तपाईं यहाँ Nepali Calendar, Popular Posts, Search Box, Label List आदि राख्न सक्नुहुन्छ।</p>
+      
+      <div style="margin: 1.5rem 0;">
+        <h4><i class="fas fa-search"></i> खोज्नुहोस्</h4>
+        <input type="text" placeholder="ब्लग खोज्नुहोस्..." style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid #ddd;">
+      </div>
+      
+      <!-- Adsense Banner Example -->
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-xxxxxxxxxxxx"
+        data-ad-slot="1234567890"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </aside>
+  </main>
+
+  <section class="download-section">
+    <h3><i class="fas fa-download"></i> नोटहरू खरिद गरी डाउनलोड गर्नुहोस्</h3>
+    <p>भुक्तानी गरेपछि डाउनलोड हुनेछ। कुनै पनि समस्यामा हामीलाई सम्पर्क गर्नुहोस्।</p>
+
+    <div class="book-container">
+      <div class="book-item">
+        <picture>
+          <source srcset="book1.webp" type="image/webp">
+          <source srcset="book1.jpg" type="image/jpeg"> 
+          <img src="book1.jpg" alt="किताब १ कभर" loading="lazy" width="120" height="180">
+        </picture>
+        <p>किताब १ - रु १००</p>
+        <button onclick="selectBook('book1', 100)" aria-label="किताब १ खरीद गर्नुहोस्, मूल्य रु १००">
+          <i class="fas fa-shopping-cart"></i> खरीद गर्नुहोस्
+        </button>
+      </div>
+      <div class="book-item">
+        <picture>
+          <source srcset="book2.webp" type="image/webp">
+          <source srcset="book2.jpg" type="image/jpeg"> 
+          <img src="book2.jpg" alt="किताब २ कभर" loading="lazy" width="120" height="180">
+        </picture>
+        <p>किताब २ - रु १५०</p>
+        <button onclick="selectBook('book2', 150)" aria-label="किताब २ खरीद गर्नुहोस्, मूल्य रु १५०">
+          <i class="fas fa-shopping-cart"></i> खरीद गर्नुहोस्
+        </button>
+      </div>
+      <div class="book-item">
+        <picture>
+          <source srcset="book3.webp" type="image/webp">
+          <source srcset="book3.jpg" type="image/jpeg"> 
+          <img src="book3.jpg" alt="किताब ३ कभर" loading="lazy" width="120" height="180">
+        </picture>
+        <p>किताब ३ - रु २००</p>
+        <button onclick="selectBook('book3', 200)" aria-label="किताब ३ खरीद गर्नुहोस्, मूल्य रु २००">
+          <i class="fas fa-shopping-cart"></i> खरीद गर्नुहोस्
+        </button>
+      </div>
+    </div>
+
+    <div class="payment-methods" id="payment-methods">
+      <p id="selected-book"></p>
+      <p>कृपया तल आफ्नो भुक्तानी माध्यम छान्नुहोस्:</p>
+      <button onclick="processPayment('esewa')"><i class="fas fa-wallet"></i> Esewa मार्फत तिर्नुहोस्</button>
+      <button onclick="processPayment('khalti')"><i class="fas fa-mobile-alt"></i> Khalti मार्फत तिर्नुहोस्</button>
+      <button onclick="processPayment('bank')"><i class="fas fa-university"></i> बैंक हस्तान्तरण</button>
+    </div>
+  </section>
+
+  <section class="calendar-section">
+    <h3><i class="fas fa-calendar-alt"></i> नेपाली पात्रो</h3>
+    <iframe src="https://nepalipatro.com.np/widgets/calender-bikram-sambat" title="Nepali Calendar" loading="lazy"></iframe>
+  </section>
+
+  <div class="footer-gadget">
+    <h4><i class="fa fa-link"></i> थप जानकारी</h4>
+    <p>यहाँ तपाईं अन्य महत्वपूर्ण लिङ्कहरू वा जानकारी थप्न सक्नुहुन्छ।</p>
+    <div style="margin-top: 1rem;">
+      <a href="#" style="margin: 0 0.5rem;"><i class="fab fa-facebook"></i></a>
+      <a href="#" style="margin: 0 0.5rem;"><i class="fab fa-twitter"></i></a>
+      <a href="#" style="margin: 0 0.5rem;"><i class="fab fa-youtube"></i></a>
+      <a href="#" style="margin: 0 0.5rem;"><i class="fab fa-instagram"></i></a>
+    </div>
+  </div>
+
+  <div class="footer-links">
+    <a href="#"><i class="fas fa-shield-alt"></i> गोपनीयता नीति</a>
+    <a href="#"><i class="fas fa-file-contract"></i> सेवा सर्त</a>
+    <a href="#"><i class="fas fa-sitemap"></i> ब्लग निर्देशिका</a>
+    <a href="#"><i class="fas fa-question-circle"></i> सहयोग</a>
+    <a href="#"><i class="fas fa-rss"></i> RSS फिड</a>
+  </div>
+
+  <footer>
+    <p>&copy; २०८१ लक्ष्मीप्रसाद जोशी. सबै अधिकार सुरक्षित।</p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem;">यो वेबसाइट HTML, CSS र JavaScript प्रयोग गरेर बनाइएको छ।</p>
+  </footer>
+
+  <script>
+    // ब्लग पोष्टहरू लोड गर्ने
+    const blogPosts = [
+      {
+        title: "ब्लग सुरु गर्ने सजिलो तरिका",
+        content: "आज म तपाईंलाई कसरी सजिलैसँग ब्लग सुरु गर्ने भनेर सिकाउनेछु। ब्लग सुरु गर्न धेरै जटिल छैन, तर केही महत्वपूर्ण कुराहरू ध्यान दिनुपर्छ। सबैभन्दा पहिले, तपाईंले आफ्नो विषयवस्तु निश्चित गर्नुपर्छ। यो तपाईंको रुचि र विशेषज्ञताको क्षेत्रमा आधारित हुनुपर्छ।",
+        date: "बैशाख १५, २०८१"
+      },
+      {
+        title: "विद्यार्थी जीवन र लक्ष्य",
+        content: "विद्यार्थी जीवनमा लक्ष्य हुनु अति आवश्यक कुरा हो। लक्ष्य नभएको विद्यार्थी जीवन नदीमा बगिरहेको डुङ्गा जस्तो हुन्छ जसको कुनै निश्चित गन्तव्य हुँदैन। लक्ष्यले हामीलाई दिशा दिन्छ, प्रेरणा दिन्छ र कठिन परिश्रम गर्न प्रेरित गर्छ।",
+        date: "चैत्र ५, २०८०"
+      },
+      {
+        title: "नेपाली संस्कृति र चाडपर्व",
+        content: "हाम्रो देश विविध संस्कृतिको संगम हो। यहाँ विभिन्न जातजाति, भाषा, धर्म र संस्कृतिहरूको सहअस्तित्व छ। यसले नेपाली संस्कृतिलाई अत्यन्तै समृद्ध बनाएको छ। हाम्रा चाडपर्वहरू पनि हाम्रो संस्कृतिको महत्वपूर्ण अंग हुन्।",
+        date: "माघ २०, २०८०"
+      }
+    ];
+
+    const postsContainer = document.getElementById("posts");
+
+    blogPosts.forEach(post => {
+      const postEl = document.createElement("article");
+      postEl.className = "blog-post";
+      postEl.innerHTML = `
+        <h2>${post.title}</h2>
+        <p style="color: #7f8c8d; margin-bottom: 0.8rem; font-size: 0.9rem;">
+          <i class="far fa-calendar-alt"></i> ${post.date}
+        </p>
+        <p>${post.content}</p>
+        <a href="#" style="color: #1abc9c; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 1rem;">
+          पूरै पढ्नुहोस् <i class="fas fa-arrow-right"></i>
+        </a>
+      `;
+      postsContainer.appendChild(postEl);
+    });
+
+    // भुक्तानी प्रणाली
+    let selectedBook = null;
+
+    function selectBook(bookId, price) {
+      selectedBook = {id: bookId, price: price};
+      const paymentMethods = document.getElementById('payment-methods');
+      paymentMethods.style.display = 'block';
+      document.getElementById('selected-book').innerText = `चयन गरिएको किताब: ${bookId.toUpperCase()}, मूल्य: रु ${price}`;
+      
+      // स्क्रोल गर्ने
+      paymentMethods.scrollIntoView({behavior: 'smooth'});
+      
+      // विटा ट्र्याकिङ
+      trackButtonClick(`${bookId}-purchase`);
+    }
+
+    async function processPayment(method) {
+      if (!selectedBook) return;
+      
+      try {
+        // यहाँ वास्तविक भुक्तानी प्रक्रिया थप्न सकिन्छ
+        alert(`भुक्तानी प्रक्रिया सुरु हुँदैछ: ${method} मार्फत रु ${selectedBook.price}`);
+        
+        // डेमोको लागि मात्र (वास्तविकमा API कल गर्नुपर्छ)
+        const paymentSuccessful = confirm(`के तपाईं ${method} मार्फत रु ${selectedBook.price} तिर्न चाहनुहुन्छ?`);
+        
+        if (paymentSuccessful) {
+          alert('भुक्तानी सफल भयो! डाउनलोड सुरु हुँदैछ...');
+          // यहाँ वास्तविक डाउनलोड लिङ्क प्रदान गर्ने
+          window.open(`download.php?book=${selectedBook.id}`, '_blank');
+        }
+      } catch (error) {
+        console.error('भुक्तानी त्रुटि:', error);
+        alert('भुक्तानी प्रक्रियामा त्रुटि भयो');
+      }
+    }
+
+    // वेब विटा मापन
+    function trackButtonClick(buttonName) {
+      if ('gtag' in window) {
+        gtag('event', 'click', {
+          'event_category': 'button',
+          'event_label': buttonName
+        });
+      }
+      console.log('Button clicked:', buttonName);
+    }
+
+    // Service Worker रेजिस्टर गर्ने
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('ServiceWorker registration successful');
+          })
+          .catch(err => {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+      });
+    }
+
+    // डार्क/लाइट मोड टगल गर्ने बटन थप्ने
+    function addDarkModeToggle() {
+      const darkModeToggle = document.createElement('button');
+      darkModeToggle.id = 'dark-mode-toggle';
+      darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      darkModeToggle.style.position = 'fixed';
+      darkModeToggle.style.bottom = '20px';
+      darkModeToggle.style.right = '20px';
+      darkModeToggle.style.zIndex = '99';
+      darkModeToggle.style.background = '#2c3e50';
+      darkModeToggle.style.color = 'white';
+      darkModeToggle.style.border = 'none';
+      darkModeToggle.style.borderRadius = '50%';
+      darkModeToggle.style.width = '50px';
+      darkModeToggle.style.height = '50px';
+      darkModeToggle.style.cursor = 'pointer';
+      darkModeToggle.style.boxShadow = '0 2px 5px rgba(0,0,0,0.3)';
+      
+      darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('force-dark');
+        if (document.body.classList.contains('force-dark')) {
+          darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+          darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+      });
+      
+      document.body.appendChild(darkModeToggle);
+    }
+
+    // डार्क मोड टगल CSS थप्ने
+    const style = document.createElement('style');
+    style.textContent = `
+      body.force-dark {
+        background-color: #121212 !important;
+        color: #e0e0e0 !important;
+      }
+      body.force-dark .blog-post,
+      body.force-dark aside,
+      body.force-dark .download-section,
+      body.force-dark .calendar-section,
+      body.force-dark .book-item {
+        background-color: #1e1e1e !important;
+        color: #ffffff !important;
+        box-shadow: 0 0 5px rgba(255,255,255,0.1) !important;
+      }
+      body.force-dark .blog-post h2,
+      body.force-dark aside h3 {
+        color: #bb86fc !important;
+      }
+      body.force-dark .download-section {
+        background: #2d2d2d !important;
+        border-color: #f39c12 !important;
+      }
+      body.force-dark .calendar-section {
+        background: #1a2e2b !important;
+        border-color: #1abc9c !important;
+      }
+      body.force-dark .footer-gadget {
+        background: #1a1a1a !important;
+        color: #e0e0e0 !important;
+      }
+      body.force-dark .footer-links {
+        background: #2d2d2d !important;
+      }
+      body.force-dark .footer-links a {
+        color: #e0e0e0 !important;
+      }
+      body.force-dark .book-item p {
+        color: #e0e0e0 !important;
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // डार्क मोड टगल बटन थप्ने
+    addDarkModeToggle();
+  </script>
+</body>
+</html>
